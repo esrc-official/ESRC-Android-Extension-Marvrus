@@ -95,7 +95,7 @@ getSupportFragmentManager().beginTransaction()
 
 ### Step 3: Start the ESRC SDK
 
-Start the ESRC SDK to recognize your facial expression, heart response and emotion. To the `start()` method, pass the `ESRCType.Property` to select analysis modules and the `ESRC.ESRCHandler` to handle the results. You should implement the callback method of `ESRC.ESRCHandler` interface. So, you can receive the results of face, facial landmark, head pose, attention, facial expression, heart rate, heart rate variability and engagement. Please refer to **[sample app](https://github.com/esrc-official/ESRC-Android-Extension-Marvrus)**.
+Start the ESRC SDK to recognize your facial expression, heart response and emotion. To the `start()` method, pass the `MarvrusType.Property` to select analysis modules and the `Marvrus.MarvrusHandler` to handle the results. You should implement the callback method of `Marvrus.MarvrusHandler` interface. So, you can receive the results of face, facial landmark, head pose, attention, facial expression, heart rate, heart rate variability and engagement. Please refer to **[sample app](https://github.com/esrc-official/ESRC-Android-Extension-Marvrus)**.
 
 ```java
 Marvrus.start(
@@ -113,7 +113,7 @@ Marvrus.start(
         true),  // Whether recognize MEE index or not.    
     new Marvrus.MarvrusHandler() {
         @Override
-        public void onRecognizedESRC(int id, ESRCType.Face face, ..., ESRCException e) {
+        public void onRecognizedESRC(int id, MarvrusType.Face face, ..., ESRCException e) {
             if (e != null) {
                 // Handle error.
             )
