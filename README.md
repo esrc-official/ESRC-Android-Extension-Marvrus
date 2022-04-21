@@ -14,7 +14,7 @@
 
 ## Installation
 
-To use our Android samples, you should first install [ESRC SDK Extension Marvrus for Android](https://github.com/esrc-official/ESRC-SDK-Android-Extension-Marvrus) 2.4.4 or higher on your system and should be received License Key by requesting by our email: **esrc@esrc.co.kr** <br /> 
+To use our Android samples, you should first install [ESRC SDK Extension Marvrus for Android](https://github.com/esrc-official/ESRC-SDK-Android-Extension-Marvrus) 2.4.6 or higher on your system and should be received License Key by requesting by our email: **esrc@esrc.co.kr** <br /> 
 
 <br />
 
@@ -53,7 +53,7 @@ if you would like to try the sample app specifically fit to your usage, you can 
 Initialization binds the ESRC SDK to Android’s context, thereby allowing it to use a camera in your mobile. To the `init()` method, pass the **App ID** of your ESRC application to initialize the ESRC SDK and the **ESRCLicenseHandler** to received callback for validation of the App ID.
 
 ```java
-ESRC.init(APP_ID, getApplicationContext(), new ESRCLicense.ESRCLicenseHandler() {
+Marvrus.init(APP_ID, getApplicationContext(), new ESRCLicense.ESRCLicenseHandler() {
     @Override
     public void onValidatedLicense() {
         …
@@ -66,7 +66,7 @@ ESRC.init(APP_ID, getApplicationContext(), new ESRCLicense.ESRCLicenseHandler() 
 });
 ```
 
-> Note: The `ESRC.init()` method must be called once across your Android app. It is recommended to initialize the ESRC SDK in the `onCreate()` method of the Application instance.
+> Note: The `Marvrus.init()` method must be called once across your Android app. It is recommended to initialize the ESRC SDK in the `onCreate()` method of the Application instance.
 
 ### (Optional) Step 2: Bind the ESRC Fragment
 
@@ -98,8 +98,8 @@ getSupportFragmentManager().beginTransaction()
 Start the ESRC SDK to recognize your facial expression, heart response and emotion. To the `start()` method, pass the `ESRCType.Property` to select analysis modules and the `ESRC.ESRCHandler` to handle the results. You should implement the callback method of `ESRC.ESRCHandler` interface. So, you can receive the results of face, facial landmark, head pose, attention, facial expression, heart rate, heart rate variability and engagement. Please refer to **[sample app](https://github.com/esrc-official/ESRC-Android-Extension-Marvrus)**.
 
 ```java
-ESRC.start(
-    new ESRCType.Property(
+Marvrus.start(
+    new MarvrusType.Property(
         true,  // Whether visualize result or not. It is only valid If you bind the ESRC Fragment (i.e., Step 2).
         true,  // Whether analyze measurement environment or not.
         true,  // Whether detect face or not.
@@ -109,44 +109,29 @@ ESRC.start(
         true,  // Whether recognize valence facial expression or not. If enableFace is false, it is also automatically set to false.
         true,  // Whether estimate remote hr or not. If enableFace is false, it is also automatically set to false.
         true,  // Whether analyze HRV not not. If enableFace or enableRemoteHR is false, it is also automatically set to false.
-        true);  // Whether recognize engagement or not. If enableRemoteHR and enableHRV are false, it is also automatically set to false.        
-    new ESRC.ESRCHandler() {
+        true,  // Whether recognize engagement or not. If enableRemoteHR and enableHRV are false, it is also automatically set to false.    
+        true);  // Whether recognize MEE index or not.    
+    new Marvrus.MarvrusHandler() {
         @Override
-        public void onDetectedFace(ESRCTYPE.Face face, ESRCException e) {
-            if(e != null) {
+        public void onRecognizedESRC(int id, ESRCType.Face face, ..., ESRCException e) {
+            if (e != null) {
                 // Handle error.
-            }
+            )
             
-        // The face is detected.
-            // Through the “face” parameter of the onDetectedFace() callback method,
-            // you can get the location of the face from the result object
-            // that ESRC Heart SDK has passed to the onDetectedFace().
-            …
+            // The ESRC results are recognized.
+            // Through the paraemters of the onRecognizedESRC() callback method,
+            // you can get the information of the face and heart response from the result object
+            // that ESRC SDK Extension Marvrus has passed to the onRecognizedESRC().
         }
-        
-        // Please implement other callback method of ESRC.ESRCHandler interface.
-        @Override public void onNotDetectedFace( … ) { … }
-        @Override public void onAnalyzedMeasureEnv( … ) { … }
-        @Override public void onDetectedFacialLandmark( … ) { … }
-        @Override public void onAnalyzedFacialActionUnit( … ) { … }
-        @Override public void onRecognizedBasicFacialExpression( … ) { … }
-        @Override public void onRecognizedValenceFacialExpression( … ) { … }
-        @Override public void onEstimatedHeadPose( … ) { … }
-        @Override public void onRecognizedAttention( … ) { … }
-        @Override public void didChangedProgressRatioOnRemoteHR( … ) { … }
-        @Override public void onEstimatedRemoteHR( … ) { … }
-        @Override public void didChangedProgressRatioOnHRV( … ) { … }
-        @Override public void onAnalyzedHRV( … ) { … }
-        @Override public void onRecognizedEngagement( … ) { … }
     });
 ```
 
 ### (Optional) Step 4: Feed the ESRC SDK
 
-Feed `OpenCV Mat` on the ESRC SDK. To the `feed()` method, pass the `Mat` image received using a camera in real-time. Please do it at 10 fps. You can skip this step if you follow Step 2: Bind the ESRC Fragment.
+Feed `Mat` on the ESRC SDK. To the `feed()` method, pass the `Mat` image received using a camera in real-time. Please do it at 10 fps. You can skip this step if you follow Step 2: Bind the ESRC Fragment.
 
 ```java
-ESRC.feed(Mat);
+Marvrus.feed(Mat);
 ```
 
 ### Step 5: Stop the ESRC SDK
@@ -154,7 +139,7 @@ ESRC.feed(Mat);
 When your app is not use the camera or destroyed, stop the ESRC SDK.
 
 ```java
-ESRC.stop();
+Marvrus.stop();
 ```
 
 <br />

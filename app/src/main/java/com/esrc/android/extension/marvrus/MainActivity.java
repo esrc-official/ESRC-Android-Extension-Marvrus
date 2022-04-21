@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         Marvrus.start(mProperty, new Marvrus.MarvrusHandler() {
 
             @Override
-            public void onRecognizedESRC(int id, ESRCType.Face face, ESRCType.FacialLandmark facialLandmark, ESRCType.FacialActionUnit facialActionUnit, ESRCType.BasicFacialExpression basicFacialExpression, ESRCType.ValenceFacialExpression valenceFacialExpression, ESRCType.ProgressRatio progressRatioOnRemoteHR, ESRCType.RemoteHR remoteHR, ESRCType.ProgressRatio progressRatioOnHRV, ESRCType.HRV hrv, ESRCType.Engagement engagement, MarvrusType.MEEIndex meeIndex, String meeJson, ESRCException e) {
+            public void onRecognizedESRC(int id, MarvrusType.Face face, MarvrusType.FacialLandmark facialLandmark, MarvrusType.FacialActionUnit facialActionUnit, MarvrusType.BasicFacialExpression basicFacialExpression, MarvrusType.ValenceFacialExpression valenceFacialExpression, MarvrusType.ProgressRatio progressRatioOnRemoteHR, MarvrusType.RemoteHR remoteHR, MarvrusType.ProgressRatio progressRatioOnHRV, MarvrusType.HRV hrv, MarvrusType.Engagement engagement, MarvrusType.MEEIndex meeIndex, String meeJson, ESRCException e) {
                 if (e == null) {
                     Log.d(TAG, "onRecognizedESRC: " + meeJson);
 
