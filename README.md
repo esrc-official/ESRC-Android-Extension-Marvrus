@@ -110,7 +110,7 @@ Marvrus.start(
         true,  // Whether estimate remote hr or not. If enableFace is false, it is also automatically set to false.
         true,  // Whether analyze HRV not not. If enableFace or enableRemoteHR is false, it is also automatically set to false.
         true,  // Whether recognize engagement or not. If enableRemoteHR and enableHRV are false, it is also automatically set to false.    
-        true);  // Whether recognize MEE index or not.    
+        true),  // Whether recognize MEE index or not.    
     new Marvrus.MarvrusHandler() {
         @Override
         public void onRecognizedESRC(int id, ESRCType.Face face, ..., ESRCException e) {
@@ -126,7 +126,15 @@ Marvrus.start(
     });
 ```
 
-### (Optional) Step 4: Feed the ESRC SDK
+### (Optional) Step 4: Set the MEE property
+
+Set the ESRC SDK to recognize MEE index by passing the `MarvrusType.MEEProperty`.
+
+```java
+Marvrus.setMEEProperty(MEEProperty)
+```
+
+### (Optional) Step 5: Feed the ESRC SDK
 
 Feed `Mat` on the ESRC SDK. To the `feed()` method, pass the `Mat` image received using a camera in real-time. Please do it at 10 fps. You can skip this step if you follow Step 2: Bind the ESRC Fragment.
 
@@ -134,7 +142,7 @@ Feed `Mat` on the ESRC SDK. To the `feed()` method, pass the `Mat` image receive
 Marvrus.feed(Mat);
 ```
 
-### Step 5: Stop the ESRC SDK
+### Step 6: Stop the ESRC SDK
 
 When your app is not use the camera or destroyed, stop the ESRC SDK.
 
