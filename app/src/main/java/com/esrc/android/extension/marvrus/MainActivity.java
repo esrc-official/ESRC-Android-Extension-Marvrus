@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             true,  // Whether estimate remote hr or not. If enableFace is false, it is also automatically set to false.
             true,  // Whether analyze HRV or not. If enableFace or enableRemoteHR is false, it is also automatically set to false.
             true,  // Whether recognize engagement or not. If enableRemoteHR and enableHRV are false, it is also automatically set to false.
+            true,  // Whether print information or not.
             true);  // Whether recognize MEE index or not.
 
     // Layout variables for FaceBox
@@ -209,6 +210,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             public void onRecognizedESRC(int id, MarvrusType.Face face, MarvrusType.FacialLandmark facialLandmark, MarvrusType.FacialActionUnit facialActionUnit, MarvrusType.BasicFacialExpression basicFacialExpression, MarvrusType.ValenceFacialExpression valenceFacialExpression, MarvrusType.ProgressRatio progressRatioOnRemoteHR, MarvrusType.RemoteHR remoteHR, MarvrusType.ProgressRatio progressRatioOnHRV, MarvrusType.HRV hrv, MarvrusType.Engagement engagement, MarvrusType.MEEIndex meeIndex, String meeJson, ESRCException e) {
                 if (e == null) {
                     Log.d(TAG, "onRecognizedESRC: " + meeJson);
+                    Log.d(TAG, "onRecognizedFacialLandmark: " + facialLandmark);
+                    Log.d(TAG, "onRecognizedFacialActionUnit: " + facialActionUnit);
 
                     // Whether face is detected or not
                     if (face.getIsDetect()) {  // If face is detected
